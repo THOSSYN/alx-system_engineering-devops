@@ -12,4 +12,7 @@
 20-hiago script remove uppercase C and lowercase c from Chicago
 21-reverse script print the reverse of a string
 22-users_and_homes script displays content of the /etc/passwd in alphabetical order
-102-acrostic print first character of each line 
+100-empty_casks script list files in subdirectories and delete
+101-gifs prints all file extension .gif 
+102-acrostic print first character of each line
+103-the_biggest_fan script prints log 
