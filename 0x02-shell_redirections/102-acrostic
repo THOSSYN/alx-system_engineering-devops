@@ -1,0 +1,2 @@
+#!/bin/bash
+cat some_file | cut -c1
