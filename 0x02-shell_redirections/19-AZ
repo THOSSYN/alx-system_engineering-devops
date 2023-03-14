@@ -1,0 +1,2 @@
+#!/bin/bash
+echo "Let us convert all characters 'A'and 'c' to 'Z' and 'e'" | tr Ac Ze
