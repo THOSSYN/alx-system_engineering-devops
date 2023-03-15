@@ -13,4 +13,6 @@
 11-binary_to_decimal script convert base 2 number to base 10
 12-combination scripts prints combination of two characters.
 13-print_float scripts print float number.
-100-decimal_to_hexadecimal coverts to base 16
+100-decimal_to_hexadecimal coverts to base 16.
+101-rot13 script uses the alphabet rotation to encrypt and decrypt
+102-odd script print in pattern
