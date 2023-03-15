@@ -8,7 +8,7 @@
 7-file script create a special file name 
 8-cwd_state script writes into current working directory
 10-no_more_js script removes all regular file from the current directory
-
+18-letteronly print all lines begining with a letter character
 19-AZ script translate characters from one set to the other
 20-hiago script remove uppercase C and lowercase c from Chicago
 21-reverse script print the reverse of a string
