@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
 #parsing apache log file
 
-
+file_var="apache-access.log"
+awk 'match($0, /([0-9]{1,3}\.){3}[0-9]{1,3}|HTTP\/1\.[01]\" [0-9]{3}/) { print substr($0, RSTART, RLENGTH) }' "$file_var"
