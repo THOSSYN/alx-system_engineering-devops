@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+#displays the content of the current directory
+
+LIST=$(ls .)
+for i in $LIST
+do
+	NEW=$(echo "$i" | cut -d '-' -f2-)
+	echo "$NEW"
+done
