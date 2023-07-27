@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+#sort ip address
+file_var="apache-access.log"
+
+awk 'match($0, /([0-9]{1,3}\.){3}[0-9]{1,3}|HTTP\/1\.[01]\" [0-9]{3}/) {
+       ip = substr($0, RSTART, RLENGTH)
+       if (ip ~ /[0-9]{3}$/) {
+         status_code = substr(ip, RSTART+13, RLENGTH)
+         ip = substr(ip, 1, RSTART-2)
+         ip_status_freq[ip, status_code]++
+       } else {
+         ip_freq[ip]++
+       }
+     }
+     END {
+       for (ip_status in ip_status_freq) {
+         split(ip_status, arr, SUBSEP)
+         print ip_status_freq[ip_status], arr[1], arr[2]
+       }
+       for (ip in ip_freq) {
+         print ip_freq[ip], ip
+       }
+     }' "$file_var" | sort -k1,1nr
