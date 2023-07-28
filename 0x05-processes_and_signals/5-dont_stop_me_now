@@ -2,4 +2,4 @@
 #terminates a running process
 
 PID=$(pgrep -f 4-to_infinity_and_beyond)
-kill -15 $PID
+kill -15 "$PID"
