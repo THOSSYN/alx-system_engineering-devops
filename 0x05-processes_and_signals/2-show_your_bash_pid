@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#Get process Id for only Bash
+# shellcheck disable=SC2009
+ps aux | grep "bash"

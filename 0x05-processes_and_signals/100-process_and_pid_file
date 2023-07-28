@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+#Creates a Process and PID file
+
+my_pid=$$
+mkdir -p /var/run && touch /var/run/myscript.pid && echo "$my_pid" > /var/run/myscript.pid
+
+function my_trap1()
+{
+	echo "I hate the kill command"
+	rm -rf /var/run/myscript.pid
+	exit 0
+}
+
+function my_trap2()
+{
+	echo "Y U no love me?!"
+}
+trap my_trap1 SIGTERM
+trap my_trap2 SIGINT
+while true
+do
+	echo "To infinity and beyond"
+	sleep 2
+done
