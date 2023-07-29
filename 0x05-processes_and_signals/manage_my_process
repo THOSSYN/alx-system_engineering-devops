@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+#writes I am alive! indefinetely
+start_process() {
+	echo $$ > /var/run/my_process.pid
+	while true; do
+		echo "I am alive!" >> /tmp/my_process
+		sleep 2
+	done
+}
+
+stop_process() {
+	if [ -f /var/run/my_process.pid ]; then
+		kill "$(cat /var/run/my_process.pid)"
+		rm /var/run/my_process.pid
+	fi
+}
+
+case "$1" in
+	start)
+		start_process >/dev/null 2>&1 &
+		echo "manage_my_process started"
+		;;
+	stop)
+		stop_process
+		echo "manage_my_process stopped"
+		;;
+	restart)
+		stop_process
+		start_process >/dev/null 2>&1 &
+		echo "manage_my_process restarted"
+		;;
+	*)
+		echo "Usage: manage_my_process {start|stop|restart}"
+		exit 1
+		;;
+esac
