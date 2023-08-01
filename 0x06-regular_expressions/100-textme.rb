@@ -8,7 +8,7 @@ end
 def print_statistics(matches)
   if matches
     matches.each do |sender, receiver, flags|
-      puts "#{sender}, #{receiver}, #{flags}"
+      puts "#{sender},#{receiver},#{flags}"
     end
   else
     puts "No matches found."
