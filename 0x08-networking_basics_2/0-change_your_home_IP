@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+#Changes the IP address from arbitrary correct one
+#makes a backup copy of /etc/hosts
+cp /etc/hosts /etc/hosts.backup
+
+newhostsfile="/etc/hosts.new"
+#use search and replace method of sed to change ip/DNS
+sed 's/127.0.0.1/127.0.0.2/' /etc/hosts > "$newhostsfile"
+sed -i 's/157.240.11.35/8.8.8.8/' "$newhostsfile"
+
+#checks if sed command ran successfully
+if sed 's/127.0.0.1/127.0.0.2/' /etc/hosts > "$newhostsfile" && sed -i 's/157.240.11.35/8.8.8.8/' "$newhostsfile"
+then
+	cp "$newhostsfile" /etc/hosts
+else
+	exit 1
+fi
+#remove new host file once we're done with it
+rm "$newhostsfile"
