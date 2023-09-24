@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Creates an ssh key with input file
+
+ssh -i ~/.ssh/school ubuntu@54.237.100.5

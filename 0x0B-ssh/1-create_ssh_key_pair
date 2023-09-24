@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Creates an ssh key pair with preset credentials
+
+ssh-keygen -b 4096 -f school -P "betty"
