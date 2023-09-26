@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# A script that installs nginx and updates Nginx configuration
+
+config_content="listen 80;\nroot /var/www/html/;\nindex index.html;\nlocation / {\n  $uri $uri/ =301;\n}\nerror_page 404 /error404.html;\nlocation = /error404.html {\n  root /var/www/html;\n  internal;\n}"
+
+# Update the package list
+sudo apt-get update
+
+# Install Nginx
+sudo apt-get install nginx -y
+
+# Create the initial HTML file
+echo "Hello World!" | sudo tee /var/www/html/index.html
+
+# Set correct permissions
+sudo chmod 0755 /var/www/html/index.html
+
+# Create the custom error page
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/error404.html
+
+# Set correct permissions
+sudo chmod 0755 /var/www/html/error404.html
+
+# Use sed to substitute the configuration content
+sudo sed -i "s/listen 80 default_server;/${config_content}/" /etc/nginx/sites-available/default
+
+# Start Nginx service
+sudo service nginx start
