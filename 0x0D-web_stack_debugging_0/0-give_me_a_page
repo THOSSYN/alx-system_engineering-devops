@@ -1,3 +1,5 @@
-sudo docker exec -it 0781f3da4780fc0b00d200109325fc2628b9c6789b1a5330a6fe6e91e759fe7a bash
+apt-get update
+apt-get install nginx -y
+echo "Hello Holberton" | sudo tee /var/www/html/index.html
 service apache2 start
 service apache2 status
