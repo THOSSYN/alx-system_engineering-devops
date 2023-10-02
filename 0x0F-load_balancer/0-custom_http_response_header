@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# A script that configures Nginx server to return
+# a header 'X-Served-By'
+
+# config="server {\n\tlisten 80;\n\tserver_name 52.3.255.219;\n\troot /var/www/html;\n\t location / {\n\t\tadd_header X-Served-By \"351953-web-02\";\n\t}"
+
+if [ ! -x /usr/sbin/nginx ]; then
+   apt-get update
+   apt-get install -y nginx
+fi
+
+echo -e "server {\n\tlisten 80;\n\tserver_name 52.3.255.219;\
+\n\troot /var/www/html;\n\tindex index.html;\n\
+\n\tlocation / {\n\t\tadd_header X-Served-By \"351953-web-02\";\
+\n\t}\n}" | sudo tee -a /etc/nginx/sites-enabled/default > /dev/null
+
+sudo service nginx start
