@@ -1,37 +1,31 @@
 # A manifest that automates the task of creating a HTTP Header
 
-package { 'nginx':
-  ensure   => 'latest',
-  provider => 'apt',
+include stdlib
+
+package {'nginx':
+  ensure  =>  installed,
 }
 
-file { '/etc/nginx/sites-available/set_header':
-  ensure  => present,
-  content => "
-server {
-  listen 80;
-  server_name 54.237.100.5;
-  
-  root /var/www/html;
-  index index.html;
-
-  location / {
-     add_header X-Served-By "351953-web-01";
-  }
-}",
+file {'/var/www/html/index.html':
+  ensure  =>  present,
+  content =>  'Hello World!',
 }
 
-file { '/etc/nginx/sites-enabled/set_header':
-  ensure => 'link',
-  target => '/etc/nginx/sites-available/set_header',
+file { '/etc/nginx/sites-enabled/def*':
+  ensure  =>  absent,
 }
 
-file { '/etc/nginx/sites-enabled/default':
-  ensure => absent,
+file_line { 'including custom header':
+  path  =>  '/etc/nginx/sites-available/default',
+  line  =>  "\t\t# as directory, then fall back to displaying a 404.\n\t\tadd_header X-Served-By \"${fact['networking']['hostname']}\";",
+  match =>  '# as directory, then fall back to displaying a 404.',
+}
+
+file {'/etc/nginx/sites-enabled/default':
+  ensure =>  present,
+  link   =>  '/etc/nginx/sites-available/default',
 }
 
 service { 'nginx':
-  ensure  => 'running',
-  enable  => true,
-  require => [File['/etc/nginx/sites-enabled/set_header'], Package['nginx']],
+  ensure  =>  running,
 }
