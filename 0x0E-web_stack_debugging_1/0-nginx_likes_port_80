@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# A script that configures nginx server to port 80
+
+config_file="/etc/nginx/sites-enabled/default"
+sed -i 's|listen 8080 default_server;|listen 80;|' "$config_file"
+sudo nginx -s reload
