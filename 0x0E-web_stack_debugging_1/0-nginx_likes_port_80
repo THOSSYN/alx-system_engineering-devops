@@ -2,5 +2,7 @@
 # A script that configures nginx server to port 80
 
 config_file="/etc/nginx/sites-enabled/default"
-sed -i 's|listen 8080 default_server;|listen 80;|' "$config_file"
+sudo apt-get update
+sudo apt-get -y install nginx
+sed -i 's|listen 8080 default_server;|listen 80 default_server;|' "$config_file"
 sudo service nginx restart
