@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# A script that creates a nginx user that should run nginx web server
+
+adduser --system --no-create-home --disabled-login --group nginx
+sed -i 's/^user .*/user nginx;/' /etc/nginx/nginx.conf
+sed -i 's/listen 80;/listen 8080;/' /etc/nginx/sites-enabled/*
+sudo chown -R nginx:nginx /var/www/html
+sudo service nginx restart

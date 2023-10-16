@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# A script that runs who am i on the user passed as argument
+
+User="$1"
+id -un "$User"
