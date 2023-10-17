@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# A script that dump a database into a file as tar.gz
+Today=$(date +%d-%m-%Y)
+mysqldump -uroot --password="$1" tyrell_corp --result-file=backup.sql
+tar -czvf "$Today".tar.gz backup.sql
