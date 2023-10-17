@@ -2,12 +2,12 @@
 # A script that runs who am i on the user passed as argument
 
 User="$1"
+sudo -u "$User" whoami
+#if [ $# -lt 1 ]; then
+#	echo "Usage: $0 username"
+#	exit 1
+#fi
 
-if [ $# -lt 1 ]; then
-	echo "Usage: $0 username"
-	exit 1
-fi
-
-if id "$User" &> /dev/null; then
-	sudo -u "$User" whoami
-fi
+#if id "$User" &> /dev/null; then
+#	sudo -u "$User" whoami
+#fi
