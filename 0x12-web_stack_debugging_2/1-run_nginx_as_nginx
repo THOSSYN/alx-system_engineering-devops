@@ -1,8 +1,35 @@
 #!/usr/bin/env bash
 # A script that creates a nginx user that should run nginx web server
 
-adduser --system --no-create-home --disabled-login --group nginx
-sed -i 's/^user .*/user nginx;/' /etc/nginx/nginx.conf
-sed -i 's/listen 80;/listen 8080;/' /etc/nginx/sites-enabled/*
-sudo chown -R nginx:nginx /var/www/html
+#adduser --system --no-create-home --disabled-login --group nginx
+#sed -i 's/^user .*/user nginx;/' /etc/nginx/nginx.conf
+#sed -i 's/listen 80;/listen 8080;/' /etc/nginx/sites-enabled/*
+#sudo chown -R nginx:nginx /var/www/html
+#sudo service nginx restart
+if [ ! -x /usr/sbin/nginx ]; then
+  sudo apt-get update
+  sudo apt-get install nginx -y
+fi
+
+# Create an Nginx configuration file to listen on port 8080
+cat <<EOL | sudo tee /etc/nginx/sites-available/nginx_config
+server {
+    listen 8080 default_server;
+    listen [::]:8080 default_server;
+    root /var/www/html;
+    index index.html;
+
+    location / {
+        add_header X-Served-By "nginx";
+    }
+}
+EOL
+
+# Create a symbolic link to enable the configuration
+sudo ln -s /etc/nginx/sites-available/nginx_config /etc/nginx/sites-enabled/
+
+# Set Nginx to run as the nginx user
+sudo sed -i 's|^user .*$|user nginx;|' /etc/nginx/nginx.conf
+
+# Restart Nginx to apply the changes
 sudo service nginx restart
