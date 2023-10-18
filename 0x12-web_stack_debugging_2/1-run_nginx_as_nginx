@@ -11,6 +11,7 @@ if [ ! -x /usr/sbin/nginx ]; then
   sudo apt-get install nginx -y
 fi
 
+sudo chown -R nginx:nginx /var/www/html /etc/nginx
 # Create an Nginx configuration file to listen on port 8080
 cat <<EOL | sudo tee /etc/nginx/sites-available/nginx_config
 server {
@@ -26,6 +27,9 @@ server {
 EOL
 
 # Create a symbolic link to enable the configuration
+if [ -L '/etc/nginx/sites-enabled/nginx_config' ]; then
+	sudo rm /etc/nginx/sites-enabled/nginx_config
+fi
 sudo ln -s /etc/nginx/sites-available/nginx_config /etc/nginx/sites-enabled/
 
 # Set Nginx to run as the nginx user
