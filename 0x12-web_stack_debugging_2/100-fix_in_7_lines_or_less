@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# A script that configures an nginx server to run on nginx user
+
