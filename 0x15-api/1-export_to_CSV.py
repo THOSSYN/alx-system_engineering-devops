@@ -14,7 +14,7 @@ if __name__ == '__main__':
     res1 = requests.get(f'{url}/users/{userid}')
 
     res1_json = res1.json()
-    name = res1_json.get('name')
+    name = res1_json.get('username')
 
     to_json = res.json()
 
