@@ -15,7 +15,6 @@ if __name__ == '__main__':
 
     res_json = res.json()
     res1_json = res1.json()
-    #print(res_json)
     name = res1_json.get('username')
     to_dict = {}
     attr_list = []
@@ -29,4 +28,3 @@ if __name__ == '__main__':
 
     with open(f'{userid}.json', "w") as f:
         json.dump(to_dict, f)
-    print(to_dict) 
