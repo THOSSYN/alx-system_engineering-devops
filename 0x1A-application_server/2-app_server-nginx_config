@@ -1,0 +1,10 @@
+server {
+    listen 80;
+    server_name 54.237.100.5 127.0.0.1;
+
+    add_header X-Served-By 351953-web-01;
+
+    location / {
+        proxy_pass http://127.0.0.1:5000;
+    }
+}
